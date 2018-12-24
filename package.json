@@ -1,0 +1,24 @@
+{
+  "name": "homebridge-mqtt-humidifier",
+  "version": "0.1.0",
+  "description": "humidifier plugin for homebridge, implemented with mqtt",
+  "keywords": [
+    "homebridge-plugin",
+    "http",
+    "temperature sensor"
+  ],
+  "engines": {
+    "node": ">=0.12.0",
+    "homebridge": ">=0.2.0"
+  },
+  "author": {
+    "name": "@olegpopadko"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/olegpopadko/homebridge-mqtt-humidifier.git"
+  },
+  "dependencies": {
+    "mqtt": ">=1.12.0"
+  }
+}
