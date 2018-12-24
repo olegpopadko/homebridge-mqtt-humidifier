@@ -95,6 +95,10 @@ class MqttHumidifier {
                     self.humidity = parseInt(message);
                     self.service.getCharacteristic(Characteristic.CurrentRelativeHumidity).updateValue(self.humidity);
 
+                    if (!self.isActive) {
+                        break;
+                    }
+
                     var power = self.power
 
                     if (self.humidity < self.relativeHumidityHumidifierThreshold) {
@@ -110,7 +114,8 @@ class MqttHumidifier {
                     }
                     break;
                 default:
-                    this.log.debug("Unknown topic: " + topic + "message: " + message);
+                    this.log.error("Unknown topic: " + topic + "message: " + message);
+                    break;
             }
         })
 
