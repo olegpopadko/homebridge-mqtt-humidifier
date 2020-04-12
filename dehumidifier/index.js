@@ -165,9 +165,11 @@ class MqttDehumidifier {
 
         var self = this
 
-        this.client.publish(this.refreshHumidityTopic, 'refresh', null, function (error, packet) {
-            callback(null, self.humidity)
-        })
+        callback(null, self.humidity)
+
+        if (this.refreshHumidityTopic) {
+            this.client.publish(this.refreshHumidityTopic, 'refresh');
+        }
     }
 
     async getCurrentHumidifierState(callback) {
@@ -189,7 +191,9 @@ class MqttDehumidifier {
 
         callback()
 
-        this.client.publish(this.refreshHumidityTopic, 'refresh');
+        if (this.refreshHumidityTopic) {
+            this.client.publish(this.refreshHumidityTopic, 'refresh');
+        }
     }
 
     async getRelativeHumidityDehumidifierThreshold(callback) {
@@ -205,6 +209,8 @@ class MqttDehumidifier {
 
         callback()
 
-        this.client.publish(this.refreshHumidityTopic, 'refresh');
+        if (this.refreshHumidityTopic) {
+            this.client.publish(this.refreshHumidityTopic, 'refresh');
+        }
     }
 }
