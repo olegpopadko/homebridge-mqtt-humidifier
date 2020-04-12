@@ -81,7 +81,7 @@ class MqttDehumidifier {
                     self.power = POWER_OFF
                     self.currentHumidifierState = Characteristic.CurrentHumidifierDehumidifierState.INACTIVE
 
-                    if (message == POWER_ON) {
+                    if (JSON.parse(message).state == POWER_ON) {
                         self.currentHumidifierState = Characteristic.CurrentHumidifierDehumidifierState.DEHUMIDIFYING
                         self.power = POWER_ON
                     }
@@ -149,10 +149,13 @@ class MqttDehumidifier {
 
         this.isActive = (state === Characteristic.Active.ACTIVE)
 
+        callback();
+
         if (this.isActive) {
-            this.client.publish(this.refreshHumidityTopic, 'refresh', null, function (error, packet) {
-                callback();
-            });
+            if (this.refreshHumidityTopic) {
+                this.client.publish(this.refreshHumidityTopic, 'refresh', null, function (error, packet) {
+                });
+            }
         } else {
             this.client.publish(this.powerCommandTopic, POWER_OFF, null, function (error, packet) {
                 callback();
