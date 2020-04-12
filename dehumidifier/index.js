@@ -29,12 +29,11 @@ class MqttDehumidifier {
         this.client.subscribe(this.powerTopic)
         this.client.subscribe(this.humidityTopic)
 
-        this.client.publish(this.powerCommandTopic, POWER_ON, null)
-        this.power = POWER_ON
+        this.power = POWER_OFF
         this.isActive = true
-        this.currentHumidifierState = Characteristic.CurrentHumidifierDehumidifierState.DEHUMIDIFYING
-        this.relativeHumidityHumidifierThreshold = 45;
-        this.relativeHumidityDehumidifierThreshold = 60;
+        this.currentHumidifierState = Characteristic.CurrentHumidifierDehumidifierState.INACTIVE
+        this.relativeHumidityHumidifierThreshold = 60;
+        this.relativeHumidityDehumidifierThreshold = 75;
 
         this.service = new Service.HumiditySensor(this.name)
 
