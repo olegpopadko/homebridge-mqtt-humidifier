@@ -4,17 +4,17 @@ var mqtt = require('mqtt');
 module.exports = function (homebridge) {
     Service = homebridge.hap.Service
     Characteristic = homebridge.hap.Characteristic
-    homebridge.registerAccessory("homebridge-mqtt-humidifier", "MqttHumidifier", MqttHumidifier)
+    homebridge.registerAccessory("homebridge-mqtt-dehumidifier", "MqttDehumidifier", MqttDehumidifier)
 }
 
 const POWER_ON = 'ON'
 const POWER_OFF = 'OFF'
 
-class MqttHumidifier {
+class MqttDehumidifier {
 
     constructor(log, config) {
         this.log = log
-        this.name = config.name || 'Humidifier'
+        this.name = config.name || 'Dehumidifier'
 
         this.mqttUrl = config['mqttUrl']
         this.client_Id = 'mqttjs_' + Math.random().toString(16).substr(2, 8)
